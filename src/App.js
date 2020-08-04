@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import "./App.css";
 import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
@@ -22,8 +22,8 @@ class App extends React.Component {
     // https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
     // https://firebase.google.com/docs/reference/js/firebase.auth.Auth#onauthstatechanged
     // onAuthStateChanged is an open subscription and returns firebase.Unsubscribe
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+      createUserProfileDocument(user);
     });
   }
 
