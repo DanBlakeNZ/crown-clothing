@@ -22,10 +22,10 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 // https://firebase.google.com/docs/reference/js/firebase.auth.GoogleAuthProvider
+// https://firebase.google.com/docs/reference/js/firebase.auth.GoogleAuthProvider#setcustomparameters
 const provider = new firebase.auth.GoogleAuthProvider();
-
-// https://developers.google.com/identity/protocols/oauth2/openid-connect#authenticationuriparameters
 provider.setCustomParameters({ prompt: "select_account" });
+
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -51,6 +51,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     }
   }
 
+  // Else user exists, return userRef;
   return userRef;
 };
 
