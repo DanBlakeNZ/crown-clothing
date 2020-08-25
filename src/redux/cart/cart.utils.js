@@ -17,3 +17,23 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   // This will run the first time an item is added to the cart.
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
+
+export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+  const existingCartItem = cartItems.find(
+    (cartItems) => cartItems.id === cartItemToRemove.id
+  );
+
+  if (existingCartItem.quantity === 1) {
+    return clearItemFromCart(cartItems, cartItemToRemove);
+  }
+
+  return cartItems.map((cartItem) =>
+    cartItem.id === cartItemToRemove.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
+
+export const clearItemFromCart = (cartItems, cartItemToRemove) => {
+  return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
+};
