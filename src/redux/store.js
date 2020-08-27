@@ -2,11 +2,13 @@
 // https://redux.js.org/advanced/middleware#the-final-approach
 
 import { createStore, applyMiddleware } from "redux";
+import { persistStore } from "redux-persist";
 import logger from "redux-logger";
 import rootReducer from "./root-reducer";
 
 const middlewares = [logger]; // Including middlewares in an array makes it easy to add/manage middlewares
 
-const store = createStore(rootReducer, applyMiddleware(...middlewares));
+export const store = createStore(rootReducer, applyMiddleware(...middlewares));
+export const persistor = persistStore(store); // A persistent version of the store
 
-export default store;
+export default { store, persistor };
