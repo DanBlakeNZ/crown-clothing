@@ -3,10 +3,11 @@
 
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // Actually the window.localStorage object, tellin.
+import storage from "redux-persist/lib/storage"; // Actually the window.localStorage object.
 
-import UserReducer from "./user/user.reducer";
-import CartReducer from "./cart/cart.reducer";
+import cartReducer from "./cart/cart.reducer";
+import directoryReducer from "./directory/directory.reducer";
+import userReducer from "./user/user.reducer";
 
 const persistConfig = {
   key: "root", // At what point do we want to start storing everything - from the root.
@@ -18,8 +19,9 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  user: UserReducer,
-  cart: CartReducer,
+  cart: cartReducer,
+  directory: directoryReducer,
+  user: userReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
