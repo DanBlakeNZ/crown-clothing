@@ -8,6 +8,7 @@ import storage from "redux-persist/lib/storage"; // Actually the window.localSto
 import cartReducer from "./cart/cart.reducer";
 import directoryReducer from "./directory/directory.reducer";
 import userReducer from "./user/user.reducer";
+import shopReducer from "./shop/shop.reducer";
 
 const persistConfig = {
   key: "root", // At what point do we want to start storing everything - from the root.
@@ -21,6 +22,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   cart: cartReducer,
   directory: directoryReducer,
+  shop: shopReducer,
   user: userReducer,
 });
 
