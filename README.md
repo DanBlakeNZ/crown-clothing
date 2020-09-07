@@ -6,3 +6,4 @@ Built with:
 - React Router
 - Firebase
 - Stripe
+- SCSS
