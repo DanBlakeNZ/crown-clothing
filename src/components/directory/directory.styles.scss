@@ -1,8 +1,6 @@
-import styled from "styled-components";
-
-export const DirectoryMenu = styled.div`
+.directory-menu {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-`;
+}
