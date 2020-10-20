@@ -67,4 +67,22 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   return await batch.commit(); //returns promise
 };
 
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollections = collections.docs.map((doc) => {
+    const { title, items } = doc.data(); // Use data method to get the data off the snapshot.
+
+    return {
+      routeName: encodeURI(title.toLowerCase()), // Encodes a string into a something that can be used by a URL.
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  return transformedCollections.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {}); // {} is the initial object
+};
+
 export default firebase;
