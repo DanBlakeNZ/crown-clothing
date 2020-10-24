@@ -28,7 +28,7 @@ class ShopPage extends React.Component {
     const { updateCollections } = this.props;
     const collectionRef = firestore.collection("collections"); // The actual name of the collection is 'collections'
 
-    wayt; // IMPLEMENTATION 1: Observer pattern - we subscribe to receive live updates
+    // IMPLEMENTATION 1: Observer pattern - we subscribe to receive live updates
     collectionRef.onSnapshot(async (snapshot) => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
       updateCollections(collectionsMap);
