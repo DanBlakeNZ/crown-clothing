@@ -23,21 +23,24 @@ class App extends React.Component {
     // https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
     // https://firebase.google.com/docs/reference/js/firebase.auth.Auth#onauthstatechanged
     // onAuthStateChanged is an open subscription and returns firebase.Unsubscribe
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(
+      async (userAuth) => {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);
 
-        //https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
+          //https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot
+          userRef.onSnapshot((snapShot) => {
+            setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data(),
+            });
           });
-        });
-      } else {
-        setCurrentUser(userAuth); // userAuth = null
-      }
-    });
+        } else {
+          setCurrentUser(userAuth); // userAuth = null
+        }
+      },
+      (error) => console.log(error)
+    );
   }
 
   componentWillUnmount() {

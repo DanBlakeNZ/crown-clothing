@@ -28,11 +28,29 @@ class ShopPage extends React.Component {
     const { updateCollections } = this.props;
     const collectionRef = firestore.collection("collections"); // The actual name of the collection is 'collections'
 
+    wayt; // IMPLEMENTATION 1: Observer pattern - we subscribe to receive live updates
     collectionRef.onSnapshot(async (snapshot) => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
       updateCollections(collectionsMap);
       this.setState({ loading: false });
     });
+
+    /* IMPLEMENTATION 2: Promise pattern - gets a snapshot on component mount, will only get new data on component mount.
+    collectionRef.get().then((snapshot) => {
+      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+      updateCollections(collectionsMap);
+      this.setState({ loading: false });
+    });
+    */
+
+    /* IMPLEMENTATION 3: Fetch method
+    fetch(
+      "https://firestore.googleapis.com/v1/projects/crown-db-b9b10/databases/(default)/documents/collections"
+    )
+      .then((response) => response.json())
+      .then((collections) => console.log(collections));
+      // then perform setting collections etc here
+      */
   }
 
   render() {
