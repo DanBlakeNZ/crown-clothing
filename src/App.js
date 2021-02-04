@@ -22,7 +22,7 @@ class App extends React.Component {
     const { setCurrentUser } = this.props;
     // https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
     // https://firebase.google.com/docs/reference/js/firebase.auth.Auth#onauthstatechanged
-    // onAuthStateChanged is an open subscription and returns firebase.Unsubscribe
+    // onAuthStateChanged is an open subscription and returns firebase. Follows the Observer pattern.
     this.unsubscribeFromAuth = auth.onAuthStateChanged(
       async (userAuth) => {
         if (userAuth) {
